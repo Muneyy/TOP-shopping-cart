@@ -1,0 +1,25 @@
+const [itemList, setItemList] = useState<object[]>([]);
+
+const inputList: string[] = ["potion", 'super-potion', 'hyper-potion'];
+
+const fetchItem = async (item: string, array: object[]) => {
+  const response = await fetch(`https://pokeapi.co/api/v2/item/${item}/`);
+  const object = await response.json();
+  const name: string = object.name;
+  const cost: string = object.cost;
+  array.push({ name, cost });
+}
+
+const getItemList = (itemList: string[]) => {
+  const newArray: object[] = []
+  itemList.forEach(item => {
+    fetchItem(item, newArray);
+  })
+  console.log(newArray);
+  setItemList(newArray);
+}
+
+useEffect(() => {
+  getItemList(inputList);
+  console.log(itemList);
+}, [])

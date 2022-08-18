@@ -1,0 +1,68 @@
+.card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+h1, h2, h3 {
+    margin: 10px;
+}
+
+img {
+    position: absolute;
+    top: 85%;
+    left: 5%;
+    width: 40px;
+    height: 40px;
+}
+
+button {
+    position: absolute;
+    top: 85%;
+    right: 5%;
+    width: 80px;
+    height: 40px;
+}
+
+button {
+    background-color: white;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transition: 0.1s ease;
+}
+
+button:hover {
+    box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px
+}
+
+.card {
+    box-sizing: border-box;
+    width: 230px;
+    height: 350px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 8px;
+}
+
+.card-above {
+    position: relative;
+}
+
+.card > h1,
+.card > h2 {
+    text-align: start;
+    padding-left: 16px;
+}
+
+.card > h1 {
+    font-size: 1.8rem;
+}
+
+.card > h2 {
+    font-weight: 500;
+}
+
+.card > h3 {
+    font-weight: 300;
+}
