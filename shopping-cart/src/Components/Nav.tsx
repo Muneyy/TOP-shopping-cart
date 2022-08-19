@@ -19,7 +19,7 @@ const Nav = ({cartCount, currentCost} : {
                 <li>Shop</li>
             </Link>
             <li>Items in Cart: {JSON.stringify(cartCount)}</li>
-            <li>Total Cost: {JSON.stringify(currentCost)}</li>
+            <li>Total Cost: &#36;{JSON.stringify(currentCost)}</li>
         </ul>
     </nav>
   );

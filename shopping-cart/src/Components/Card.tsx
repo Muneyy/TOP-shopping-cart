@@ -56,7 +56,7 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
         :
         <div className='card-cart'>
             <img src={item.sprite}/>
-            <h1>{item.name}</h1>
+            <h1>{useName}</h1>
             <h2>&#36;{item.cost}</h2>
         </div>
     )

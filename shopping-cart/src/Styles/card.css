@@ -8,7 +8,7 @@
 
 .card-container-cart {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     min-width: 400px;
     gap: 16px;
@@ -59,7 +59,7 @@ button:hover {
     flex-flow: row wrap;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     align-items: center;
-    width: 350px;
+    width: 450px;
     justify-content: space-between;
 }
 

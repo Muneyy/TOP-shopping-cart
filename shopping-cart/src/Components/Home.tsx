@@ -19,7 +19,7 @@ const Home = ({cartItems, currentCost} : {
             </div>
         ))}
       </div>
-      <h2>Total Cost: {currentCost}</h2>
+      <h2>Total Cost: &#36;{currentCost}</h2>
     </div>
   );
 }
