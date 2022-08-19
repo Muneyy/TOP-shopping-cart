@@ -1,10 +1,4 @@
-// 👇️ ts-nocheck disables type checking for entire file
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 
-// 👇️ ts-ignore ignores any ts errors on the next line
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { type } from '@testing-library/user-event/dist/type';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
@@ -15,79 +9,49 @@ import uniqid from 'uniqid';
 import Card from './Card';
 
 
-const Shop = () => {
+const Shop = ({items, load, setCartCount, cartCount, setCartItems} : {
+  items: object[],
+  load: boolean,
+  setCartCount: React.Dispatch<React.SetStateAction<number>>,
+  cartCount: number
+  setCartItems: React.Dispatch<React.SetStateAction<object[]>>
+  }) => {
 
-  const inputList: string[] = [
-    "potion", 'super-potion', 'hyper-potion',
-    "poke-ball", "great-ball", "ultra-ball",
-  ];
-
-  const [items, setItems] = useState<object[]>([]);
-  const [load, setLoad] = useState(false);
-
-  type itemObject = {
-    name: string,
-    cost: number,
-    sprite: string,
-    desc: string,
-    value?: string
-  }
-
-  const fetchItem = async (item: string, array: object[]) => {
-    try {
-      const response = await fetch(`https://pokeapi.co/api/v2/item/${item}/`);
-      const object = await response.json();
-      const name: string = object.name;
-      const cost: number = object.cost;
-      const sprite: string = object.sprites.default;
-      const desc: string = object.effect_entries[0].effect;
-      const obj: itemObject = {
-        name: name,
-        cost: cost,
-        sprite: sprite,
-        desc: desc
-      };
-      array.push(obj);
-      setItems(array);
-    } catch (error) {
-      throw new Error();
-    }
-  }
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const newArray: object[]= ([]);
-    async function getItemList(itemList: string[]) {
-      for (const item of itemList) {
-        fetchItem(item, newArray).catch(console.error);
-      }
-      console.log("Huh?")
+    console.log(items);
+    if (items.length === 14) {
+      setLoaded(true);
     }
-    Promise.all(getItemList(inputList))
-    .then(setLoad(true));
-  }, []);
+  }, [items])
 
 
   return (
-    (load) ? 
-    <div className="Shop">
-      <h1>Shop page</h1>
-      <div className="card-container">
-        {items.map((item: itemObject) => (
-          <div className='card-above' key={uniqid()}>
-            <Card
-            name={item.name}
-            cost={item.cost}
-            sprite={item.sprite}
-            desc={item.desc}
-            />
-          </div>
-        ))}
+      (loaded) ? 
+      <div className="Shop">
+        <h1>Shop Page</h1>
+        <div className="card-container">
+          {items.map((item: any) => (
+            <div className='card-above' key={uniqid()}>
+              <Card
+              name={item.name}
+              cost={item.cost}
+              sprite={item.sprite}
+              desc={item.desc}
+              setCartCount={setCartCount}
+              cartCount={cartCount}
+              setCartItems = {setCartItems}
+              item = {item}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div> 
-    :
-    <div className="Shop">
-      <h1>Loading...</h1>
-    </div> 
+       :
+      <div className="Shop">
+        <h1>Loading...</h1>
+      </div>
 
   );
 }

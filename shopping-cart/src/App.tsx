@@ -9,14 +9,76 @@ import { NamedDeclaration } from 'typescript';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
+  const inputList: string[] = [
+    "potion", 'super-potion', 'hyper-potion',
+    "poke-ball", "great-ball", "ultra-ball",
+    "antidote", "full-heal", "full-restore",
+    "max-potion", "max-ether", "max-elixir",
+    "max-repel", "max-revive"
+  ];
+
+  const [items, setItems] = useState<object[]>([]);
+  const [load, setLoad] = useState<boolean>(false);
+  const [cartCount, setCartCount] = useState<number>(0);
+  const [cartItems, setCartItems] = useState<object[]>([]);
+
+  type itemObject = {
+    name: string,
+    cost: number,
+    sprite: string,
+    desc: string,
+    value?: string
+  }
+
+  const fetchItem = async (item: string, array: object[]) => {
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/item/${item}/`);
+      const object = await response.json();
+      const name: string = object.name;
+      const cost: number = object.cost;
+      const sprite: string = object.sprites.default;
+      const desc: string = object.effect_entries[0].effect;
+      const obj: itemObject = {
+        name: name,
+        cost: cost,
+        sprite: sprite,
+        desc: desc
+      };
+      array.push(obj);
+      setItems(array);
+    } catch (error) {
+      throw new Error();
+    }
+  }
+
+  useEffect(() => {
+    const newArray: object[]= ([]);
+    async function getItemList(itemList: string[]) {
+      for (const item of itemList) {
+        fetchItem(item, newArray).catch(console.error);
+      }
+      await setLoad(true)
+    }
+    getItemList(inputList)
+  }, []);
 
   return (
     <Router>
       <div className='App'>
-        <Nav/>
+        <Nav cartCount={cartCount}/>
         <Routes>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Shop" element={<Shop />} />
+          <Route 
+            path="/Home" element={
+              <Home cartItems={cartItems}/>} />
+          <Route 
+            path="/Shop" element={
+              <Shop items={items} 
+                    load={load} 
+                    setCartCount ={setCartCount} 
+                    cartCount={cartCount} 
+                    setCartItems={setCartItems} 
+              />} 
+          />
         </Routes>
       </div>
     </Router>
