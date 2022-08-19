@@ -21,6 +21,7 @@ const App = () => {
   const [load, setLoad] = useState<boolean>(false);
   const [cartCount, setCartCount] = useState<number>(0);
   const [cartItems, setCartItems] = useState<object[]>([]);
+  const [currentCost, setCurrentCost] = useState<number>(0);
 
   type itemObject = {
     name: string,
@@ -65,18 +66,21 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
-        <Nav cartCount={cartCount}/>
+        <Nav cartCount={cartCount} currentCost={currentCost} />
         <Routes>
           <Route 
             path="/Home" element={
-              <Home cartItems={cartItems}/>} />
+              <Home cartItems={cartItems}
+                    currentCost={currentCost}/>} 
+              />
           <Route 
             path="/Shop" element={
               <Shop items={items} 
                     load={load} 
                     setCartCount ={setCartCount} 
                     cartCount={cartCount} 
-                    setCartItems={setCartItems} 
+                    setCartItems={setCartItems}
+                    setCurrentCost = {setCurrentCost}
               />} 
           />
         </Routes>

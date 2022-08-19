@@ -12,15 +12,12 @@ import { Link } from 'react-router-dom';
 import { stringify } from 'querystring';
 import uniqid from 'uniqid';
 
-const Card = ({name, cost, sprite, desc, setCartCount, cartCount, setCartItems, item}: {
-        name: string,
-        cost: number,
-        sprite: string,
-        desc: string,
-        setCartCount?: React.Dispatch<React.SetStateAction<number>>,
-        cartCount?: number,
-        setCartItems?: React.Dispatch<React.SetStateAction<object[]>>,
-        item?: object
+const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
+    item: object,
+    setCartCount?: React.Dispatch<React.SetStateAction<number>>,
+    cartCount?: number,
+    setCartItems?: React.Dispatch<React.SetStateAction<object[]>>,
+    setCurrentCost?: React.Dispatch<React.SetStateAction<number>>
     }) => {
 
     function toTitleCase(str: string) {
@@ -31,30 +28,36 @@ const Card = ({name, cost, sprite, desc, setCartCount, cartCount, setCartItems, 
             }
         );
     }
-
-    const useName = toTitleCase(name.replace(/-/g, ' '))
+    const fixName = item.name
+    const useName = toTitleCase(fixName.replace(/-/g, ' '))
 
     function setStatesOnClick () {
         setCartCount(cartCount + 1);
+        setCurrentCost(currentCost => currentCost + item.cost)
         setCartItems(arr => {
             console.log(arr)
             return [...arr, item]
         });
     }
 
-    
-
     return (
+        (setCartCount) ?
         <div className='card'>
             <h1>{useName}</h1>
-            <h2>&#36;{cost}</h2>
-            <img src={sprite}/>
-            <h3>{desc}</h3>
+            <h2>&#36;{item.cost}</h2>
+            <img src={item.sprite}/>
+            <h3>{item.desc}</h3>
             <button 
                 className='add-to-cart' 
                 onClick={() => setStatesOnClick()}>
                 Add to Cart
             </button>
+        </div>
+        :
+        <div className='card-cart'>
+            <img src={item.sprite}/>
+            <h1>{item.name}</h1>
+            <h2>&#36;{item.cost}</h2>
         </div>
     )
 }

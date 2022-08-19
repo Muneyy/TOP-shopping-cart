@@ -6,6 +6,15 @@
     position: relative;
 }
 
+.card-container-cart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    min-width: 400px;
+    gap: 16px;
+    align-items: center;
+}
+
 h1, h2, h3 {
     margin: 10px;
 }
@@ -43,6 +52,19 @@ button:hover {
     height: 350px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: 8px;
+}
+
+.card-cart {
+    display: flex;
+    flex-flow: row wrap;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    align-items: center;
+    width: 350px;
+    justify-content: space-between;
+}
+
+.card-cart > img {
+    position: inherit;
 }
 
 .card-above {

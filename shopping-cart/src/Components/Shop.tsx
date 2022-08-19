@@ -9,12 +9,13 @@ import uniqid from 'uniqid';
 import Card from './Card';
 
 
-const Shop = ({items, load, setCartCount, cartCount, setCartItems} : {
+const Shop = ({items, load, setCartCount, cartCount, setCartItems, setCurrentCost} : {
   items: object[],
   load: boolean,
   setCartCount: React.Dispatch<React.SetStateAction<number>>,
-  cartCount: number
-  setCartItems: React.Dispatch<React.SetStateAction<object[]>>
+  cartCount: number,
+  setCartItems: React.Dispatch<React.SetStateAction<object[]>>,
+  setCurrentCost: React.Dispatch<React.SetStateAction<number>>
   }) => {
 
   const [loaded, setLoaded] = useState(false);
@@ -30,19 +31,16 @@ const Shop = ({items, load, setCartCount, cartCount, setCartItems} : {
   return (
       (loaded) ? 
       <div className="Shop">
-        <h1>Shop Page</h1>
+        <h1>Mart</h1>
         <div className="card-container">
           {items.map((item: any) => (
             <div className='card-above' key={uniqid()}>
               <Card
-              name={item.name}
-              cost={item.cost}
-              sprite={item.sprite}
-              desc={item.desc}
+              item = {item}
               setCartCount={setCartCount}
               cartCount={cartCount}
               setCartItems = {setCartItems}
-              item = {item}
+              setCurrentCost = {setCurrentCost}
               />
             </div>
           ))}

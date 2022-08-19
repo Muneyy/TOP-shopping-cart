@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-const Nav = (cartCount: any) => {
+const Nav = ({cartCount, currentCost} : {
+  cartCount: number,
+  currentCost: number
+}) => {
 
   return (
     <nav className='nav-links'>
@@ -16,6 +19,7 @@ const Nav = (cartCount: any) => {
                 <li>Shop</li>
             </Link>
             <li>Items in Cart: {JSON.stringify(cartCount)}</li>
+            <li>Total Cost: {JSON.stringify(currentCost)}</li>
         </ul>
     </nav>
   );
