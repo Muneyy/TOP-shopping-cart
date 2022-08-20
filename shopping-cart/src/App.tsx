@@ -15,7 +15,8 @@ const App = () => {
     "poke-ball", "great-ball", "ultra-ball",
     "antidote", "full-heal", "full-restore",
     "max-potion", "max-ether", "max-elixir",
-    "max-repel", "max-revive"
+    "max-repel", "max-revive", "escape-rope",
+    "ice-heal", "burn-heal", "awakening"
   ];
 
   const [items, setItems] = useState<object[]>([]);
@@ -91,7 +92,11 @@ const App = () => {
           <Route 
               path="/TOP-shopping-cart/Shop/:name"
               element = {
-                <ItemDetail/>
+                <ItemDetail
+                  setCartCount={setCartCount}
+                  setCartItems={setCartItems}
+                  setCurrentCost = {setCurrentCost}
+                />
               }
           />
         </Routes>

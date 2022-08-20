@@ -21,7 +21,7 @@ const Shop = ({items, load, setCartCount, cartCount, setCartItems, setCurrentCos
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (items.length === 14) {
+    if (items.length === 18) {
       setLoaded(true);
     }
   }, [items])

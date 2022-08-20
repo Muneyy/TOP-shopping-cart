@@ -41,19 +41,15 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
 
     return (
         (setCartCount) ?
-        <div className='card'>
-            <Link to={`/TOP-shopping-cart/Shop/${item.name}`}>
-                <h1>{useName}</h1>
-                <h2>&#36;{item.cost}</h2>
+        <Link to={`/TOP-shopping-cart/Shop/${item.name}`}>
+            <div className='card'>
+                <div className="name-cost">
+                    <h1>{useName}</h1>
+                    <h2>&#36;{item.cost}</h2>
+                </div>
                 <img src={item.sprite}/>
-                <h3>{item.desc}</h3>
-            </Link>
-            <button 
-                className='add-to-cart' 
-                onClick={() => setStatesOnClick()}>
-                Add to Cart
-            </button>
-        </div>
+            </div>
+        </Link>
         :
         <div className='card-cart'>
             <img src={item.sprite}/>
