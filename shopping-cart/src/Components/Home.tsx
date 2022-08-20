@@ -2,6 +2,7 @@ import { type } from '@testing-library/user-event/dist/type';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import Card from './Card';
+import uniqid from 'uniqid';
 
 
 const Home = ({cartItems, currentCost} : {
@@ -14,7 +15,7 @@ const Home = ({cartItems, currentCost} : {
       <h1>Shopping Cart</h1>
       <div className="card-container-cart">
         {cartItems.map((item: any) => (
-            <div className="card-above">
+            <div className="card-above" key ={uniqid()}>
               <Card item={item}/>
             </div>
         ))}

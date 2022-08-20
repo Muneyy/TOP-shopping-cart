@@ -12,10 +12,10 @@ const Nav = ({cartCount, currentCost} : {
     <nav className='nav-links'>
         <h3>PokeMart</h3>
         <ul className='nav-links-ul'>
-            <Link to="/Home">
+            <Link to="/TOP-shopping-cart/Home">
                 <li>Home</li>
             </Link>
-            <Link to="/Shop">
+            <Link to="/TOP-shopping-cart/Shop">
                 <li>Shop</li>
             </Link>
             <li>Items in Cart: {JSON.stringify(cartCount)}</li>

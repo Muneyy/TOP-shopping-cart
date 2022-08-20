@@ -35,7 +35,6 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
         setCartCount(cartCount + 1);
         setCurrentCost(currentCost => currentCost + item.cost)
         setCartItems(arr => {
-            console.log(arr)
             return [...arr, item]
         });
     }
@@ -43,10 +42,12 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
     return (
         (setCartCount) ?
         <div className='card'>
-            <h1>{useName}</h1>
-            <h2>&#36;{item.cost}</h2>
-            <img src={item.sprite}/>
-            <h3>{item.desc}</h3>
+            <Link to={`/TOP-shopping-cart/Shop/${item.name}`}>
+                <h1>{useName}</h1>
+                <h2>&#36;{item.cost}</h2>
+                <img src={item.sprite}/>
+                <h3>{item.desc}</h3>
+            </Link>
             <button 
                 className='add-to-cart' 
                 onClick={() => setStatesOnClick()}>

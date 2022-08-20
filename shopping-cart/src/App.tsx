@@ -7,6 +7,7 @@ import Shop from './Components/Shop';
 import Nav from './Components/Nav';
 import { NamedDeclaration } from 'typescript';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ItemDetail from './Components/ItemDetail';
 
 const App = () => {
   const inputList: string[] = [
@@ -68,20 +69,30 @@ const App = () => {
       <div className='App'>
         <Nav cartCount={cartCount} currentCost={currentCost} />
         <Routes>
-          <Route 
-            path="/Home" element={
+        <Route 
+            path="/" element={
               <Home cartItems={cartItems}
                     currentCost={currentCost}/>} 
-              />
+          />
           <Route 
-            path="/Shop" element={
+            path="/TOP-shopping-cart/Home" element={
+              <Home cartItems={cartItems}
+                    currentCost={currentCost}/>} 
+          />
+          <Route 
+            path="/TOP-shopping-cart/Shop" element={
               <Shop items={items} 
                     load={load} 
                     setCartCount ={setCartCount} 
                     cartCount={cartCount} 
                     setCartItems={setCartItems}
                     setCurrentCost = {setCurrentCost}
-              />} 
+          />}/>
+          <Route 
+              path="/TOP-shopping-cart/Shop/:name"
+              element = {
+                <ItemDetail/>
+              }
           />
         </Routes>
       </div>
