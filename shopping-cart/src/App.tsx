@@ -73,12 +73,20 @@ const App = () => {
         <Route 
             path="/" element={
               <Home cartItems={cartItems}
-                    currentCost={currentCost}/>} 
+                    currentCost={currentCost}
+                    setCartItems = {setCartItems}
+                    setCartCount = {setCartCount}
+                    setCurrentCost = {setCurrentCost}
+              />} 
           />
           <Route 
             path="/TOP-shopping-cart/Home" element={
               <Home cartItems={cartItems}
-                    currentCost={currentCost}/>} 
+                    currentCost={currentCost}
+                    setCartItems = {setCartItems}
+                    setCartCount = {setCartCount}
+                    setCurrentCost = {setCurrentCost}
+              />} 
           />
           <Route 
             path="/TOP-shopping-cart/Shop" element={
@@ -88,7 +96,8 @@ const App = () => {
                     cartCount={cartCount} 
                     setCartItems={setCartItems}
                     setCurrentCost = {setCurrentCost}
-          />}/>
+              />}
+          />
           <Route 
               path="/TOP-shopping-cart/Shop/:name"
               element = {

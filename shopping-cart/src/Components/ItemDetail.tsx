@@ -4,6 +4,7 @@ import '../App.css';
 import Card from './Card';
 import { useLocation } from 'react-router-dom';
 import '../Styles/itemDetail.css'
+import uniqid from 'uniqid';
 
 
 const ItemDetail = ({setCartCount, setCartItems, setCurrentCost} : {
@@ -44,6 +45,7 @@ const ItemDetail = ({setCartCount, setCartItems, setCurrentCost} : {
             eng: engText,
             jap: japText,
             kor: korText,
+            id: uniqid()
           };
           setDisplayItem(obj);
           console.log(object)
@@ -53,11 +55,19 @@ const ItemDetail = ({setCartCount, setCartItems, setCurrentCost} : {
       }
 
     function setStatesOnClick () {
-    setCartCount(prevCount => prevCount + 1);
-    setCurrentCost(currentCost => currentCost + displayItem.cost)
-    setCartItems(arr => {
-        return [...arr, displayItem]
-    });
+        setCartCount(prevCount => prevCount + 1);
+        setCurrentCost(currentCost => currentCost + displayItem.cost);
+        const newObject = {
+            id : uniqid()
+        }
+        setDisplayItem((prevItem: object) => ({
+            ...prevItem,
+            ...newObject
+        }))
+        setCartItems(arr => {
+            console.log(arr);
+            return [...arr, displayItem]
+        });
     }
 
     return (

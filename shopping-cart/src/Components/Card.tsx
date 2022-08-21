@@ -12,12 +12,13 @@ import { Link } from 'react-router-dom';
 import { stringify } from 'querystring';
 import uniqid from 'uniqid';
 
-const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
+const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost, cardForShop}: {
     item: object,
     setCartCount?: React.Dispatch<React.SetStateAction<number>>,
     cartCount?: number,
     setCartItems?: React.Dispatch<React.SetStateAction<object[]>>,
-    setCurrentCost?: React.Dispatch<React.SetStateAction<number>>
+    setCurrentCost?: React.Dispatch<React.SetStateAction<number>>,
+    cardForShop: boolean
     }) => {
 
     function toTitleCase(str: string) {
@@ -31,16 +32,21 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
     const fixName = item.name
     const useName = toTitleCase(fixName.replace(/-/g, ' '))
 
-    function setStatesOnClick () {
-        setCartCount(cartCount + 1);
-        setCurrentCost(currentCost => currentCost + item.cost)
+    function updateStatesOnRemove (id, cost) {
+        setCartCount(count => count - 1);
+        setCurrentCost(prevCost => prevCost - cost);
         setCartItems(arr => {
-            return [...arr, item]
+            const newArray = arr.filter(item => {
+                if (item.id !== id) {
+                    return item
+                }
+            });
+            return [...newArray];
         });
     }
 
     return (
-        (setCartCount) ?
+        (cardForShop) ?
         <Link to={`/TOP-shopping-cart/Shop/${item.name}`}>
             <div className='card'>
                 <div className="name-cost">
@@ -55,6 +61,7 @@ const Card = ({item, setCartCount, cartCount, setCartItems, setCurrentCost}: {
             <img src={item.sprite}/>
             <h1>{useName}</h1>
             <h2>&#36;{item.cost}</h2>
+            <button onClick={() => updateStatesOnRemove(item.id, item.cost)}>Remove Item</button>
         </div>
     )
 }

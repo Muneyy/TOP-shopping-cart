@@ -40,6 +40,7 @@ const Shop = ({items, load, setCartCount, cartCount, setCartItems, setCurrentCos
               cartCount={cartCount}
               setCartItems = {setCartItems}
               setCurrentCost = {setCurrentCost}
+              cardForShop = {true}
               />
             </div>
           ))}
