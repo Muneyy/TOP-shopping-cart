@@ -57,12 +57,15 @@ const App = () => {
   useEffect(() => {
     const newArray: object[]= ([]);
     async function getItemList(itemList: string[]) {
-      for (const item of itemList) {
+      // for (const item of itemList) {
+      //   fetchItem(item, newArray).catch(console.error);
+      // }
+      Promise.all(itemList.map(item => {
         fetchItem(item, newArray).catch(console.error);
-      }
-      await setLoad(true)
+      }))
+      await setLoad(true);
     }
-    getItemList(inputList)
+    getItemList(inputList);
   }, []);
 
   return (

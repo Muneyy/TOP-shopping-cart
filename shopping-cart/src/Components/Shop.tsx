@@ -21,14 +21,14 @@ const Shop = ({items, load, setCartCount, cartCount, setCartItems, setCurrentCos
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (items.length === 18) {
+    if (load) {
       setLoaded(true);
     }
-  }, [items])
+  }, [load]);
 
 
   return (
-      (loaded) ? 
+      (load) ? 
       <div className="Shop">
         <h1>Mart</h1>
         <div className="card-container">
