@@ -10,14 +10,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ItemDetail from './Components/ItemDetail';
 
 const App = () => {
-  const inputList: string[] = [
-    "potion", 'super-potion', 'hyper-potion',
-    "poke-ball", "great-ball", "ultra-ball",
-    "antidote", "full-heal", "full-restore",
-    "max-potion", "max-ether", "max-elixir",
-    "max-repel", "max-revive", "escape-rope",
-    "ice-heal", "burn-heal", "awakening"
-  ];
+  // const inputList: string[] = [
+  //   "potion", 'super-potion', 'hyper-potion',
+  //   "poke-ball", "great-ball", "ultra-ball",
+  //   "antidote", "full-heal", "full-restore",
+  //   "max-potion", "max-ether", "max-elixir",
+  //   "max-repel", "max-revive", "escape-rope",
+  //   "ice-heal", "burn-heal", "awakening"
+  // ];
 
   const [items, setItems] = useState<object[]>([]);
   const [load, setLoad] = useState<boolean>(false);
@@ -25,48 +25,49 @@ const App = () => {
   const [cartItems, setCartItems] = useState<object[]>([]);
   const [currentCost, setCurrentCost] = useState<number>(0);
 
-  type itemObject = {
-    name: string,
-    cost: number,
-    sprite: string,
-    desc: string,
-    value?: string
-  }
+  // type itemObject = {
+  //   name: string,
+  //   cost: number,
+  //   sprite: string,
+  //   desc: string,
+  //   value?: string
+  // }
 
-  const fetchItem = async (item: string, array: object[]) => {
-    try {
-      const response = await fetch(`https://pokeapi.co/api/v2/item/${item}/`);
-      const object = await response.json();
-      const name: string = object.name;
-      const cost: number = object.cost;
-      const sprite: string = object.sprites.default;
-      const desc: string = object.effect_entries[0].effect;
-      const obj: itemObject = {
-        name: name,
-        cost: cost,
-        sprite: sprite,
-        desc: desc
-      };
-      array.push(obj);
-      setItems(array);
-    } catch (error) {
-      throw new Error();
-    }
-  }
+  // const fetchItem = async (item: string, array: object[]) => {
+  //   try {
+  //     const response = await fetch(`https://pokeapi.co/api/v2/item/${item}/`);
+  //     const object = await response.json();
+  //     const name: string = object.name;
+  //     const cost: number = object.cost;
+  //     const sprite: string = object.sprites.default;
+  //     const desc: string = object.effect_entries[0].effect;
+  //     const obj: itemObject = {
+  //       name: name,
+  //       cost: cost,
+  //       sprite: sprite,
+  //       desc: desc
+  //     };
+  //     array.push(obj);
+  //     setItems(array);
+  //   } catch (error) {
+  //     throw new Error();
+  //   }
+  // }
 
-  useEffect(() => {
-    const newArray: object[]= ([]);
-    async function getItemList(itemList: string[]) {
-      // for (const item of itemList) {
-      //   fetchItem(item, newArray).catch(console.error);
-      // }
-      Promise.all(itemList.map(item => {
-        fetchItem(item, newArray).catch(console.error);
-      }))
-      await setLoad(true);
-    }
-    getItemList(inputList);
-  }, []);
+  // useEffect(() => {
+  //   const newArray: object[]= ([]);
+  //   async function getItemList(itemList: string[]) {
+  //     setLoad(false);
+  //     // for (const item of itemList) {
+  //     //   fetchItem(item, newArray).catch(console.error);
+  //     // }
+  //     Promise.all(itemList.map(item => {
+  //       fetchItem(item, newArray).catch(console.error);
+  //     }))
+  //     await setLoad(true);
+  //   }
+  //   getItemList(inputList);
+  // }, []);
 
   return (
     <Router>

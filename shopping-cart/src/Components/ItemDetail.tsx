@@ -48,7 +48,6 @@ const ItemDetail = ({setCartCount, setCartItems, setCurrentCost} : {
             id: uniqid()
           };
           setDisplayItem(obj);
-          console.log(object)
         } catch (error) {
           throw new Error();
         }
@@ -65,7 +64,6 @@ const ItemDetail = ({setCartCount, setCartItems, setCurrentCost} : {
             ...newObject
         }))
         setCartItems(arr => {
-            console.log(arr);
             return [...arr, displayItem]
         });
     }
